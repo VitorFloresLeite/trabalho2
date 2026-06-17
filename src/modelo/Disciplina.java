@@ -1,4 +1,6 @@
-enum Disciplina {
+package modelo;
+
+public enum Disciplina {
     ALGORITMOS,
     CALCULO,
     PROGRAMACAO_ORIENTADA_A_OBJETOS,

@@ -1,5 +1,5 @@
 package modelo;
 
-enum turnos{
+public enum Turnos {
     MANHA, TARDE, NOITE
 }

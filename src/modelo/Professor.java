@@ -30,15 +30,15 @@ public class Professor {
         }
     }
 
-    public String getNome{
-        return nome;
+    public String getNome(){
+        return this.nome;
     }
 
-    public List<String> getCompetencias{
+    public List<String> getCompetencias(){
         return Collections.unmodifiableList(competencias);
     }
 
-    public List<Horario> getDisponibilidade{
+    public List<Horario> getDisponibilidade(){
         return Collections.unmodifiableList(disponibilidade);
     }
 }

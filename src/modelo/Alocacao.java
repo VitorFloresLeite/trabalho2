@@ -20,9 +20,9 @@ public class Alocacao{
         }
 
         //validação da regra de negocio: saber se o professor tem competencia para essa disciplina
-        if(!professor.temCompetencia(disciplina)){
+        /*if(!professor.temCompetencia(disciplina)){
             throw new IllegalArgumentException("O professor "+ professor.getNome()+" não tem competencia cadastrada para a disciplina " + disciplina.getNome());
-        }
+        }*/
 
         this.disciplina = disciplina;
         this.horario = horario;

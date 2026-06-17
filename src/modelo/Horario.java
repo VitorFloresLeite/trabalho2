@@ -1,10 +1,31 @@
 package modelo;
 
 public class Horario {
-    enum DiaSemana {
-        SEGUNDA, TERÇA, QUARTA, QUINTA, SEXTA
+    private Dias dia;
+    private Periodos periodo;
+
+    public Horario(Dias dia, Periodos periodo) {
+        this.dia = dia;
+        this.periodo = periodo;
     }
-    enum Periodo{
-        manha_turno1, manha_turno2, tarde_turno1, tarde_turno2, noite_turno1, noite_turno2
+
+    public Dias getDia() {
+        return dia;
+    }
+
+    public void setDia(Dias dia) {
+        this.dia = dia;
+    }
+
+    public Periodos getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(Periodos periodo) {
+        this.periodo = periodo;
+    }
+
+    public String descricao() {//Não optei por utilizar void pois a informação não será exibida no console
+        return getDia().toString() + " - " + getPeriodo().toString();
     }
 }

@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public enum Cursos {
     SISTEMAS_DE_INFORMACAO,

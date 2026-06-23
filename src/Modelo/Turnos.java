@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public enum Turnos {
     MANHA, TARDE, NOITE

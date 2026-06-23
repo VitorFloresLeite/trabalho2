@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 //Representa o match entre um professor, uma disciplina e um horario;
 

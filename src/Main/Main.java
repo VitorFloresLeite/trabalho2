@@ -21,7 +21,7 @@ public class Main {
         try{
             grade.AdicionarAlocacao(aulaConflito);
         } catch (IllegalStateException e){
-            System.err.println("ERRO DE DOMINIO BARRADO " + e.getMessage());
+            System.out.println("ERRO DE DOMINIO BARRADO S   " + e.getMessage());
         }
 
         grade.exibirGradeTeste();

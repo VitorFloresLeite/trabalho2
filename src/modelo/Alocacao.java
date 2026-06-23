@@ -3,12 +3,16 @@ package modelo;
 //Representa o match entre um professor, uma disciplina e um horario;
 
 public class Alocacao{
+    private final Turma turma;
     private final Disciplina disciplina;
     private final Professor professor;
     private final Horario horario;
 
-    public Alocacao(Disciplina disciplina, Professor professor, Horario horario){
+    public Alocacao(Turma turma, Disciplina disciplina, Professor professor, Horario horario){
         // validação por contratos: elementos nao podem ser nulos
+        if(turma == null){
+            throw new IllegalArgumentException("A turma não pode ser nula");
+        }
         if(disciplina == null){
             throw new IllegalArgumentException("A disciplina não pode ser nula");
         }
@@ -24,9 +28,14 @@ public class Alocacao{
             throw new IllegalArgumentException("O professor "+ professor.getNome()+" não tem competencia cadastrada para a disciplina " + disciplina.getNome());
         }*/
 
+        this.turma = turma;
         this.disciplina = disciplina;
         this.horario = horario;
         this.professor = professor;
+    }
+
+    public Turma getTurma(){
+        return turma;
     }
 
     public Disciplina getDisciplina(){
@@ -40,5 +49,12 @@ public class Alocacao{
     public Horario getHorario(){
         return horario;
     }
-
+    @Override
+    public String toString(){
+        return "Alocação: " +
+                "\nTurma: " + turma.getCurso() + " - Semestre: " + turma.getSemestre() +
+                "\nDisciplina: " + disciplina +
+                "\nProfessor: " + professor.getNome() +
+                "\nHorario: " + horario.toString();
+    }
 }

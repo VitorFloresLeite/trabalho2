@@ -2,29 +2,37 @@ package Main;
 import  Modelo.*;
 
 public class Main {
-    public static void main (String[] args){
+    public static void main (String[] args) {
         Professor prof1 = new Professor("Ceslo");
+        prof1.adicionarCompetencia(Disciplina.CALCULO);
+
         Turma turma1 = new Turma(Cursos.CIENCIA_DA_COMPUTACAO, 2);
         Horario horarioSegunda = new Horario(Dias.SEGUNDA, Turnos.NOITE, Periodos.SEGUNDO);
 
         Grade grade = new Grade();
 
-        Alocacao aula1 = new Alocacao(turma1, Disciplina.CALCULO, prof1, horarioSegunda);
-        System.out.println("Alocando Aula...");
-        grade.AdicionarAlocacao(aula1);
-        System.out.println("Primeira aula alocada com sucesso!");
+        System.out.println("Tentando alocar aula 1...");
+        try {
+            Alocacao aula1 = new Alocacao(turma1, Disciplina.CALCULO, prof1, horarioSegunda);
+            grade.AdicionarAlocacao(aula1);
+            System.out.println("Primeira aula alocada com sucesso!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao criar alocação: " + e.getMessage());
+        }
+        //2. Testar bloqueio de competencia: tentar alocar o Celso para POO (ele nao tem competencia para isso)
+        System.out.println("\nTentando alocar Celso para disciplina sem competência (POO)...");
+        try {
+            Turma turma3 = new Turma(Cursos.SISTEMAS_DE_INFORMACAO, 3);
+            Horario horarioTerca = new Horario(Dias.TERCA, Turnos.NOITE, Periodos.PRIMEIRO);
 
-        Turma turma2 = new Turma(Cursos.ENGENHARIA_DE_SOFTWARE, 1);
-        Alocacao aulaConflito = new Alocacao(turma2,  Disciplina.CALCULO, prof1, horarioSegunda);
-
-        System.out.println("\nAlocando Aula...");
-        try{
-            grade.AdicionarAlocacao(aulaConflito);
-        } catch (IllegalStateException e){
-            System.out.println("ERRO DE DOMINIO BARRADO S   " + e.getMessage());
+            //Alocacao de aula invalida (exceção de competencia)
+            Alocacao aulaInvalida = new Alocacao(turma3, Disciplina.PROGRAMACAO_ORIENTADA_A_OBJETOS, prof1, horarioTerca);
+            grade.AdicionarAlocacao(aulaInvalida);
+        } catch (IllegalArgumentException e) {
+            System.out.println("SUCESSO: O sistema barrou corretamente! Motivo: " + e.getMessage());
         }
 
+        //Exibir o resultado final do teste
         grade.exibirGradeTeste();
-
     }
 }

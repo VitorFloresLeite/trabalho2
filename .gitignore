@@ -1,0 +1,10 @@
+# Arquivos de compilação do Java
+out/
+
+# Configurações do IntelliJ IDEA
+.idea/
+*.iml
+
+# Arquivos do sistema operacional (opcional, mas recomendado)
+.DS_Store
+Thumbs.db

@@ -14,7 +14,7 @@ public class Grade {
 
     public void AdicionarAlocacao(Alocacao novaAlocacao){
         if (novaAlocacao == null){
-            throw new IllegalArgumentException("A alocação não pode ser nula.");
+            throw new AlocacaoNulaException("A alocação não pode ser nula.");
         }
 
         verificarConflitos(novaAlocacao);
@@ -30,13 +30,13 @@ public class Grade {
 
             if (mesmoHorario) {
                 if (existente.getProfessor().getNome().equals(novaAlocacao.getProfessor().getNome())) {
-                    throw new IllegalStateException("Conflito de Horário: O professor " +
+                    throw new ConflitoProfessorException("Conflito de Horário: O professor " +
                             novaAlocacao.getProfessor().getNome() + " já possui aula neste horário.");
                 }
 
                 if (existente.getTurma().getCurso() == novaAlocacao.getTurma().getCurso() &&
                         existente.getTurma().getSemestre() == novaAlocacao.getTurma().getSemestre()) {
-                    throw new IllegalStateException("Conflito de Horário: A turma de " +
+                    throw new ConflitoTurmaException("Conflito de Horário: A turma de " +
                             novaAlocacao.getTurma().getCurso() + " (Semestre " +
                             novaAlocacao.getTurma().getSemestre() + ") já possui aula neste horário.");
                 }

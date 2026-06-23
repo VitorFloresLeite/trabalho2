@@ -11,16 +11,16 @@ public class Alocacao{
     public Alocacao(Turma turma, Disciplina disciplina, Professor professor, Horario horario){
         // validação por contratos: elementos nao podem ser nulos
         if(turma == null){
-            throw new IllegalArgumentException("A turma não pode ser nula");
+            throw new TurmaNulaException("A turma não pode ser nula.");
         }
         if(disciplina == null){
-            throw new IllegalArgumentException("A disciplina não pode ser nula");
+            throw new DisciplinaNulaException("A disciplina não pode ser nula.");
         }
         if(professor == null){
-            throw new IllegalArgumentException("O professor não pode ser nulo");
+            throw new ProfessorNuloException("O professor não pode ser nulo.");
         }
         if(horario == null){
-            throw new IllegalArgumentException("O horario não pode ser nulo");
+            throw new HorarioNuloException("O horario não pode ser nulo.");
         }
 
         //validação da regra de negocio: saber se o professor tem competencia para essa disciplina

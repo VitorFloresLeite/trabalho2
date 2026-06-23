@@ -11,7 +11,7 @@ public class Professor {
 
     public Professor(String nome){
         if(nome == null || nome.trim().isEmpty()){
-            throw new IllegalArgumentException("O nome do professor não pode ser vazio.");
+            throw new ProfessorNuloException("O nome do professor não pode ser vazio.");
         }
         this.nome = nome;
         this.competencias = new ArrayList<>();

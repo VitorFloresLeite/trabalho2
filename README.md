@@ -9,3 +9,7 @@ Integrantes do grupo: Diego Cremonini Bandeira, Murilo d Ávila Barbosa, Murilo 
 **Horario**: Informações detalhadas sobre o turno, período e dia da semana.
 
 **Professor**: Informações sobre o professor, como competências e disponibilidade de horário.
+
+**Grade**: Gerencia o conjunto das Alocações, aplicando as restrições necessárias para impedir conflitos.
+
+**Main**: Simulação para verfificar o funcionamento do sistema no console.

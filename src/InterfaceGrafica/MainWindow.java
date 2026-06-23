@@ -9,12 +9,30 @@ public class MainWindow {
     private static final int TABLE_TOP_OFFSET = 10;
     private static final int TABLE_SIDE_OFFSET = 10;
     
+    private static JFrame frame;
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(MainWindow::createAndShowGUI);
     }
 
     private static void createAndShowGUI() {
-        JFrame frame = new JFrame("Título da Aplicação");
+        frame = new JFrame("Gerenciador de Alocação de Horários");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton editAlocacaoButton = new JButton("Editar Alocação");
+
+        CriarTabelaEPainel();
+
+        //JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        //buttonPanel.add(editAlocacaoButton);
+        //frame.add(buttonPanel, BorderLayout.SOUTH);
+
+        frame.setSize(1000, 650);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    private static void CriarTabelaEPainel(){
+        frame = new JFrame("Gerenciador de Alocação de Horários");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout(10, 10));
 
@@ -49,16 +67,6 @@ public class MainWindow {
         tablePanel.setBorder(new EmptyBorder(TABLE_TOP_OFFSET, TABLE_SIDE_OFFSET, 10, TABLE_SIDE_OFFSET));
         tablePanel.add(scroll, BorderLayout.CENTER);
 
-        frame.add(tablePanel, BorderLayout.NORTH);
-
-        JButton editAlocacaoButton = new JButton("Editar Alocação");
-
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        buttonPanel.add(editAlocacaoButton);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-
-        frame.setSize(1000, 650);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        frame.add(tablePanel, BorderLayout.CENTER);
     }
 }

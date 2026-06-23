@@ -6,7 +6,7 @@ import java.util.List;
 public class Professor {
 
     private String nome;
-    private List<String> competencias;
+    private List<Disciplina> competencias;
     private List<Horario> disponibilidade;
 
     public Professor(String nome){
@@ -18,7 +18,7 @@ public class Professor {
         this.disponibilidade = new ArrayList<>();
     }
 
-    public void adicionarCompetencia(String disciplina){
+    public void adicionarCompetencia(Disciplina disciplina){
         if (disciplina != null && !competencias.contains(disciplina)){
             this.competencias.add(disciplina);
         }
@@ -34,12 +34,17 @@ public class Professor {
         return this.nome;
     }
 
-    public List<String> getCompetencias(){
+    public List<Disciplina> getCompetencias(){
         return Collections.unmodifiableList(competencias);
     }
 
     public List<Horario> getDisponibilidade(){
         return Collections.unmodifiableList(disponibilidade);
+    }
+    
+    @Override
+    public String toString(){
+        return "Professor: " + nome + ", Competências: " + getCompetencias().toString();//, Disponibilidade: " + disponibilidade.toString()*/";
     }
 }
 

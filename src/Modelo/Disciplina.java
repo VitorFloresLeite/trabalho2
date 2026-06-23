@@ -1,0 +1,8 @@
+package Modelo;
+
+public enum Disciplina {
+    ALGORITMOS,
+    CALCULO,
+    PROGRAMACAO_ORIENTADA_A_OBJETOS,
+    BANCO_DE_DADOS;
+}

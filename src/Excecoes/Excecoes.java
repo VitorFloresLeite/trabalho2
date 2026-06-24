@@ -1,3 +1,4 @@
+package Excecoes;
 //Exceções de Alocação
 public class TurmaNulaException extends RuntimeException {
     public TurmaNulaException(String mensagem) {

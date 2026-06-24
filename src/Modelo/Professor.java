@@ -41,7 +41,11 @@ public class Professor {
     public List<Horario> getDisponibilidade(){
         return Collections.unmodifiableList(disponibilidade);
     }
-    
+
+    public boolean temCompetencia(Disciplina disciplina){
+        return this.competencias.contains(disciplina);
+    }
+
     @Override
     public String toString(){
         return "Professor: " + nome + ", Competências: " + getCompetencias().toString();//, Disponibilidade: " + disponibilidade.toString()*/";

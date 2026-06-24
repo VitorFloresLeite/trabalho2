@@ -44,7 +44,7 @@ public class ConflitoTurmaException extends RuntimeException {
 }
 
 //Exceções de Professor
-publc class ProfessorNuloException extends RuntimeException {
+public class ProfessorNuloException extends RuntimeException {
     public ProfessorNuloException(String mensagem) {
         super(mensagem);
     }

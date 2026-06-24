@@ -1,5 +1,4 @@
 package Modelo;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,44 +6,27 @@ import java.util.List;
 public class Grade {
 
     private final List<Alocacao> alocacoes;
+    private final List<CriterioAlocacao> criterios;
 
     public Grade (){
         this.alocacoes = new ArrayList<>();
+        this.criterios = new ArrayList<>();
+
+        this.criterios.add(new ValidadorConflitoHorario());
     }
 
-    public void AdicionarAlocacao(Alocacao novaAlocacao){
+    public void AdicionarAlocacao(Alocacao novaAlocacao) {
         if (novaAlocacao == null){
-            throw new AlocacaoNulaException("A alocação não pode ser nula.");
+            throw new IllegalStateException("A alocação não pode ser nula.");
         }
-
-        verificarConflitos(novaAlocacao);
+        for (CriterioAlocacao criterio : criterios){
+            criterio.validar(novaAlocacao, alocacoes);
+        }
         this.alocacoes.add(novaAlocacao);
     }
 
-    private void verificarConflitos(Alocacao novaAlocacao) {
-        for (Alocacao existente : alocacoes) {
-            boolean mesmoHorario =
-                    existente.getHorario().getDia() == novaAlocacao.getHorario().getDia() &&
-                            existente.getHorario().getTurno() == novaAlocacao.getHorario().getTurno() &&
-                            existente.getHorario().getPeriodo() == novaAlocacao.getHorario().getPeriodo();
-
-            if (mesmoHorario) {
-                if (existente.getProfessor().getNome().equals(novaAlocacao.getProfessor().getNome())) {
-                    throw new ConflitoProfessorException("Conflito de Horário: O professor " +
-                            novaAlocacao.getProfessor().getNome() + " já possui aula neste horário.");
-                }
-
-                if (existente.getTurma().getCurso() == novaAlocacao.getTurma().getCurso() &&
-                        existente.getTurma().getSemestre() == novaAlocacao.getTurma().getSemestre()) {
-                    throw new ConflitoTurmaException("Conflito de Horário: A turma de " +
-                            novaAlocacao.getTurma().getCurso() + " (Semestre " +
-                            novaAlocacao.getTurma().getSemestre() + ") já possui aula neste horário.");
-                }
-            }
-        }
-    }
-    public List<Alocacao> getAlocacoes() {
-            return Collections.unmodifiableList(alocacoes);
+    public List<Alocacao> getAlocacoes(){
+        return Collections.unmodifiableList(alocacoes);
     }
 
     public void exibirGradeTeste(){

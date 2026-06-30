@@ -23,7 +23,7 @@ public class JanelaInicial extends Janela {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
-        JLabel title = new JLabel("Tabela de Exemplo", SwingConstants.CENTER);
+        JLabel title = new JLabel("Tabela de horários", SwingConstants.CENTER);
         title.setFont(new Font("SansSerif", Font.BOLD, 18));
         add(title, BorderLayout.NORTH);
 

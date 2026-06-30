@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.util.Objects;
+
 public class Horario {
     private Dias dia;
     private Turnos turno;
@@ -38,4 +40,17 @@ public class Horario {
     public String toString() {//Não optei por utilizar void pois a informação não será exibida no console
         return getDia().toString() + " - " + getTurno().toString() + " - " + getPeriodo().toString();
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Horario horario = (Horario) obj;
+        return dia == horario.dia && turno == horario.turno && periodo == horario.periodo;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dia, turno, periodo);
+    }
+
 }

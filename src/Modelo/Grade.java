@@ -6,22 +6,18 @@ import java.util.List;
 public class Grade {
 
     private final List<Alocacao> alocacoes;
-    private final List<CriterioAlocacao> criterios;
+    private final ValidaAlocacaoStrategy validador;
 
-    public Grade (){
+    public Grade () {
         this.alocacoes = new ArrayList<>();
-        this.criterios = new ArrayList<>();
-
-        this.criterios.add(new ValidadorConflitoHorario());
+        this.validador = new ValidadorConflitoPadrao();
     }
 
     public void AdicionarAlocacao(Alocacao novaAlocacao) {
         if (novaAlocacao == null){
             throw new IllegalStateException("A alocação não pode ser nula.");
         }
-        for (CriterioAlocacao criterio : criterios){
-            criterio.validar(novaAlocacao, alocacoes);
-        }
+        this.validador.validar(novaAlocacao, this.alocacoes);
         this.alocacoes.add(novaAlocacao);
     }
 

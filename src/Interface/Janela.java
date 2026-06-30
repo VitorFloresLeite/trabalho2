@@ -20,7 +20,6 @@ public abstract class Janela extends JFrame {
     private void configurarJanela() {
         setSize(width, height);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(offset, offset));
         setResizable(resizable);
         getContentPane().setBackground(new Color(176, 11, 105)); 

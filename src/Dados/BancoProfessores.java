@@ -1,0 +1,23 @@
+package Dados;
+import Modelo.*;
+import java.util.HashMap;
+import java.util.Map; // Lembre-se de importar o Map
+
+public class BancoProfessores {
+    private final Map<String, Professor> professores;
+
+    public BancoProfessores() {
+        this.professores = new HashMap<>();
+    }
+
+    public void adicionarProfessor(Professor professor) {
+        if (professor == null || professor.getNome() == null) { // Ajustado para getNome() baseado na sua classe Professor
+            throw new IllegalArgumentException("O professor ou o nome do professor não pode ser nulo.");
+        }
+        professores.put(professor.getNome(), professor);
+    }
+
+    public Professor buscarProfessor(String nome) {
+        return professores.get(nome);
+    }
+}

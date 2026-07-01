@@ -1,6 +1,5 @@
 package Controle;
 import Interface.*;
-
 public class ControlePaineis {
     private JanelaPrincipal janelaPrincipal;
     private static Painel painelAtual;
@@ -24,7 +23,7 @@ public class ControlePaineis {
                 break;
             case PaineisDoPrograma.CADASTRO_PROFESSOR:
                 painelAtual=cadastroProfessor;
-                janelaPrincipal.setPainel(painelAtual);;
+                janelaPrincipal.setPainel(painelAtual);
                 break;
         }
     }

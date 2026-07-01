@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class JanelaPrincipal extends Janela {
     private ControlePaineis controle;
-
+    
     public JanelaPrincipal(String titulo) {
         super(titulo);
     }

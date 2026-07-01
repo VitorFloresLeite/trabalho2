@@ -1,6 +1,7 @@
 package Interface;
 
 import Controle.ControlePaineis;
+import Dados.*;
 import Modelo.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class PainelCadastroProfessor extends Painel {
     public PainelCadastroProfessor(String titulo, ControlePaineis controle) {
         super(titulo, controle);
     }
+    public ListasDeDados lista_dados;
 
     @Override
     protected void inicializarComponentes() {
@@ -144,7 +146,15 @@ public class PainelCadastroProfessor extends Painel {
                             "Competências: " + professor.getCompetencias() + "\n" +
                             "Disponibilidade: " + professor.getDisponibilidade());
             
-                                        
+            ListasDeDados.AdicionarProfessor(professor);
+            //limpeza dos campos
+
+            campoNome.setText("");
+            for (JCheckBox caixa : caixasCompetencia) {
+                caixa.setSelected(false);
+            }
+            horariosSelecionados.clear();
+            modeloHorarios.clear();
         });
 
         Botao botaoVoltar = new Botao("Voltar", 10);

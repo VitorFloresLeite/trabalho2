@@ -16,6 +16,10 @@ public class PainelInicial extends Painel {
         button.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.GRADE));
         button.setAlignmentX(CENTER_ALIGNMENT);
         add(button);
-       
+        
+        Botao button2 = new Botao("Cadastrar Professor", 10);
+        button2.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.CADASTRO_PROFESSOR));
+        button2.setAlignmentX(CENTER_ALIGNMENT);
+        add(button2);
     }
 }

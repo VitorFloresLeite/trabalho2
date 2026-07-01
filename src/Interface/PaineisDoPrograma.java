@@ -3,5 +3,5 @@ package Interface;
 public enum PaineisDoPrograma {
     INICIAL,
     GRADE,
-    CADASTRO
+    CADASTRO_PROFESSOR
 }

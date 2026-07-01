@@ -20,7 +20,7 @@ public class Grade {
         this.validador.validar(novaAlocacao, this.alocacoes);
         this.alocacoes.add(novaAlocacao);
     }
-
+    
     public List<Alocacao> getAlocacoes(){
         return Collections.unmodifiableList(alocacoes);
     }

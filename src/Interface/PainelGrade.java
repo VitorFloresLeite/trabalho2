@@ -1,6 +1,9 @@
 package Interface;
 import Controle.*;
+import Modelo.Alocacao;
+import Modelo.Grade;
 import java.awt.*;
+import java.util.List;
 import javax.swing.*;
 
 public class PainelGrade extends Painel{
@@ -15,15 +18,10 @@ public class PainelGrade extends Painel{
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
 
-        String[] columns = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
-        Object[][] data = {
-            {"Periodo 1", "Periodo 1", "Periodo 1", "Periodo 1", "Periodo 1"},
-            {"Periodo 2", "Periodo 2", "Periodo 2", "Periodo 2", "Periodo 2"},
-            {"Periodo 3", "Periodo 3", "Periodo 3", "Periodo 3", "Periodo 3"},
-            {"Periodo 4", "Periodo 4", "Periodo 4", "Periodo 4", "Periodo 4"},
-            {"Periodo 5", "Periodo 5", "Periodo 5", "Periodo 5", "Periodo 5"},
-            {"Periodo 6", "Periodo 6", "Periodo 6", "Periodo 6", "Periodo 6"}
-        };
+        Grade grade = new Grade();
+        DadosGrade dadosGrade = ConverterGrade(grade);
+        String[] columns = dadosGrade.Colunas;
+        Object[][] data = dadosGrade.Dados;
 
         JTable table = new JTable(data, columns) {
             @Override
@@ -45,5 +43,31 @@ public class PainelGrade extends Painel{
         button.setAlignmentX(CENTER_ALIGNMENT);
         add(button);
         
+    }
+
+    private class DadosGrade{
+        public final String[] Colunas;
+        public final Object[][] Dados;
+        public DadosGrade(String[] col, Object[][] data){
+            Colunas = col;
+            Dados = data;
+        }
+    }
+    private DadosGrade ConverterGrade(Grade grade){
+        String [] colunas = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+        Object[][] dadoss = new Object[6][5];
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 5; j++) {
+                dadoss[i][j] = "não reservado";
+            }
+        }
+        List<Alocacao> alocacoes = grade.getAlocacoes();
+        for (Alocacao a : alocacoes) {
+            int col = a.getHorario().getDia().ordinal();
+            if (col < 0 || col >= 5) continue;
+            int row = a.getHorario().getTurno().ordinal() * 2 + a.getHorario().getPeriodo().ordinal();
+            dadoss[row][col] = a.getDisciplina().toString();
+        }
+        return new DadosGrade(colunas, dadoss);
     }
 }

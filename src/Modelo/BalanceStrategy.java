@@ -42,8 +42,7 @@ public class BalanceStrategy implements EstrategiaAlocacao {
                                 continue;
                             }
 
-                            Alocacao alocacao = new Alocacao(turma, disciplina,
-                                    professorMenosOcupado, horario);
+                            Alocacao alocacao = new Alocacao(turma, disciplina, professorMenosOcupado, horario);
                             grade.AdicionarAlocacao(alocacao);
                             alocada = true;
                             break;

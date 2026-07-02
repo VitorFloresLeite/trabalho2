@@ -19,12 +19,7 @@ public class PainelGrade extends Painel{
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
 
-        Grade grade = new Grade();
-        DadosGrade dadosGrade = ConverterGrade(grade);
-        String[] columns = dadosGrade.Colunas;
-        Object[][] data = dadosGrade.Dados;
-
-        JTable table = new JTable(data, columns) {
+        tabelaGrade = new JTable() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;

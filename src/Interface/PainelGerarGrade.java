@@ -60,9 +60,6 @@ public class PainelGerarGrade extends Painel{
                 JOptionPane.showMessageDialog(this, "Grade gerada com sucesso!");
                 controlePaineis.trocarPainel(PaineisDoPrograma.GRADE);
 
-            /*} catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(this, "Atenção: " + ex.getMessage());
-            }*/
             }catch (ConflitoProfessorException ex){
                 JOptionPane.showMessageDialog(this, "Erro de Alocação: " + ex.getMessage(), "Conflito de professor", JOptionPane.WARNING_MESSAGE);
 

@@ -1,5 +1,4 @@
 package Modelo;
-
 import java.util.List;
 
 public class BalanceStrategy implements EstrategiaAlocacao {

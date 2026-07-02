@@ -21,6 +21,7 @@ public class SimpleStrategy implements EstrategiaAlocacao {
                         try {
                             Alocacao alocacao = new Alocacao(turma, disciplina, professor, horario);
                             grade.AdicionarAlocacao(alocacao);
+                            turma.setHorarios(horario); 
                             alocada = true;
                             break;
                         } catch (IllegalStateException e) {

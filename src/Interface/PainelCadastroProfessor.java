@@ -30,6 +30,7 @@ public class PainelCadastroProfessor extends Painel {
         JTextField campoNome = new JTextField();
         painelNome.add(labelNome, BorderLayout.NORTH);
         painelNome.add(campoNome, BorderLayout.CENTER);
+        painelNome.setMaximumSize(new Dimension(300, 20));
         formulario.add(painelNome);
         formulario.add(Box.createVerticalStrut(10));
 

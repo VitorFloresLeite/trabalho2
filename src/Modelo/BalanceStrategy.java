@@ -7,23 +7,20 @@ public class BalanceStrategy implements EstrategiaAlocacao {
     public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas) {
         Grade grade = new Grade();
 
-        // Para cada disciplina, aloca tentando balancear carga
-        for (Disciplina disciplina : disciplinas) {
-            boolean alocada = false;
+        // INVERSÃO CORRETA: Para cada turma, aloca tentando balancear a carga dos professores
+        for (Turma turma : turmas) {
+            for (Disciplina disciplina : disciplinas) {
+                boolean alocada = false;
 
-            for (Turma turma : turmas) {
-                if (alocada) break;
-
-                // Encontra professor com competência E menos aulas já alocadas
                 Professor professorMenosOcupado = null;
                 int menorCarga = Integer.MAX_VALUE;
 
+                // Busca o professor com competência e menos carga atual
                 for (Professor professor : professores) {
                     if (!professor.temCompetencia(disciplina)) {
                         continue;
                     }
 
-                    // Conta quantas aulas ele já tem nessa grade
                     int cargaAtual = 0;
                     for (Alocacao a : grade.getAlocacoes()) {
                         if (a.getProfessor().getNome().equals(professor.getNome())) {
@@ -37,7 +34,7 @@ public class BalanceStrategy implements EstrategiaAlocacao {
                     }
                 }
 
-                // Usa o professor com menos carga
+                // Usa o professor com menos carga e tenta encontrar um horário livre
                 if (professorMenosOcupado != null) {
                     for (Horario horario : horarios) {
                         try {

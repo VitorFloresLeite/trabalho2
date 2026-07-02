@@ -1,11 +1,10 @@
 package Modelo;
-
 import java.util.List;
 
 public class SimpleStrategy implements EstrategiaAlocacao {
 
     @Override
-    public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas, List<Horario> horarios) {
+    public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas) {
         Grade grade = new Grade();
 
         // Para cada disciplina, tenta alocar com a primeira turma
@@ -21,16 +20,8 @@ public class SimpleStrategy implements EstrategiaAlocacao {
                     if (!professor.temCompetencia(disciplina)) {
                         continue;
                     }
-
-                    // Tenta cada horário
-                    for (Horario horario : horarios) {
+                    for (Horario horario : professor.getDisponibilidade()) {
                         try {
-                            // Verifica se professor tem disponibilidade
-                            if (!professor.getDisponibilidade().contains(horario)) {
-                                continue;
-                            }
-
-                            // Tenta alocar
                             Alocacao alocacao = new Alocacao(turma, disciplina, professor, horario);
                             grade.AdicionarAlocacao(alocacao);
                             alocada = true;

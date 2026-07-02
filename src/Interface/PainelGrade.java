@@ -5,8 +5,11 @@ import Modelo.Grade;
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class PainelGrade extends Painel{
+    private JTable tabelaGrade;
+
     public PainelGrade(String titulo, ControlePaineis controle) {
         super(titulo, controle);
     }

@@ -17,8 +17,7 @@ public class GeradorGrade {
 
     public Grade gerar(List<Disciplina> disciplinas,
                        List<Professor> professores,
-                       List<Turma> turmas,
-                       List<Horario> horarios) {
+                       List<Turma> turmas) {
         if (disciplinas == null || disciplinas.isEmpty()) {
             throw new IllegalArgumentException("A lista de disciplinas não pode estar vazia.");
         }
@@ -28,11 +27,10 @@ public class GeradorGrade {
         if (turmas == null || turmas.isEmpty()) {
             throw new IllegalArgumentException("A lista de turmas não pode estar vazia.");
         }
-        if (horarios == null || horarios.isEmpty()) {
-            throw new IllegalArgumentException("A lista de horários não pode estar vazia.");
+        if (estrategia == null) {
+            throw new IllegalStateException("A estratégia de alocação não foi definida.");
         }
-
-        return estrategia.gerar(disciplinas, professores, turmas, horarios);
+        return estrategia.gerar(disciplinas, professores, turmas);
     }
 
     public void setEstrategia(EstrategiaAlocacao novaEstrategia) {

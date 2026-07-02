@@ -4,8 +4,8 @@ import java.awt.*;
 import javax.swing.JFrame;
 
 public abstract class Janela extends JFrame {
-    protected int width = 1920/2;
-    protected int height = 1080/2;
+    protected int width = 1920;
+    protected int height = 1080;
     protected int offset = 10;
     protected boolean visible = true;
     protected boolean resizable = true;

@@ -138,13 +138,16 @@ public class PainelCadastroProfessor extends Painel {
             for (Horario horario : horariosSelecionados) {
                 professor.adicionarDisponibilidade(horario);
             }
-
-            JOptionPane.showMessageDialog(this,
+            try {
+                controle.cadastrarProfessor(professor);
+                JOptionPane.showMessageDialog(this,
                     "Professor cadastrado com sucesso:\n" + professor.getNome() + "\n" +
                             "Competências: " + professor.getCompetencias() + "\n" +
-                            "Disponibilidade: " + professor.getDisponibilidade());
-            
-                                        
+                            "Disponibilidade: " + professor.getDisponibilidade()); 
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar professor: " + ex.getMessage());
+                return;
+            }          
         });
 
         Botao botaoVoltar = new Botao("Voltar", 10);

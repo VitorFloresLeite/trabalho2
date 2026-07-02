@@ -62,6 +62,15 @@ public class ControlePaineis {
     public Painel getPainelAtual() {
         return painelAtual;
     }
+
+    public void setGradeGerada(Grade gradeGerada) {
+        this.gradeGerada = gradeGerada;
+    }
+
+    public Grade getGradeGerada() {
+        return gradeGerada;
+    }
+
     public void cadastrarProfessor(Professor professor){
         controleDados.cadastrarProfessor(professor);
     }

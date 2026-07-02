@@ -5,13 +5,16 @@ import java.util.List;
 public class Turma{
     private Cursos curso;
     private int semestre;
-    private List<Horario> horarios;
+    //private List<Horario> horarios;
+    private List<Disciplina> disciplinasDoSemestre;
+
 
     public Turma(Cursos curso, int semestre){
         this.curso = curso;
         this.semestre = semestre;
-        this.horarios = new ArrayList<>();
+        this.disciplinasDoSemestre = new ArrayList<>();
     }
+
     public Cursos getCurso() {
         return curso;
     }
@@ -20,11 +23,13 @@ public class Turma{
         return semestre;
     }
 
-    public List<Horario> getHorarios() {
-        return horarios;
+    public void adicionarDisciplina(Disciplina d){
+        if(d != null && !disciplinasDoSemestre.contains(d)){
+            disciplinasDoSemestre.add(d);
+        }
     }
 
-    public void setHorarios(Horario horarios) {
-        this.horarios.add(horarios);
+    public List<Disciplina> getDisciplinasDoSemestre(){
+        return new ArrayList<>(disciplinasDoSemestre); //retorna a copia para proteção de estado
     }
 }

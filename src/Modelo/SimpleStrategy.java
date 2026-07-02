@@ -10,8 +10,10 @@ public class SimpleStrategy implements EstrategiaAlocacao {
 
         for (Turma turma : turmas) {
             for (Disciplina disciplina : disciplinas) {
+                if(!turma.getDisciplinasDoSemestre().contains(disciplina)){
+                    continue;
+                }
                 boolean alocada = false;
-
 
                 for (Professor professor : professores) {
                     if (!professor.temCompetencia(disciplina)) {
@@ -21,7 +23,6 @@ public class SimpleStrategy implements EstrategiaAlocacao {
                         try {
                             Alocacao alocacao = new Alocacao(turma, disciplina, professor, horario);
                             grade.AdicionarAlocacao(alocacao);
-                            turma.setHorarios(horario);
                             alocada = true;
                             break;
                         } catch (IllegalStateException e) {

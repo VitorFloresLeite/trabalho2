@@ -48,7 +48,7 @@ public class ControlePaineis {
                 break;
             case PaineisDoPrograma.EXIBIR_TURMAS:
                 painelAtual = exibirTurmas;
-                exibirTurmas.atualizarTabela(controleDados.getTurmas());
+                exibirTurmas.atualizarTabela(controleDados.getTurmas(), this.gradeGerada);
                 janelaPrincipal.setPainel(painelAtual);
                 break;
             case PaineisDoPrograma.EXIBIR_PROFESSORES:

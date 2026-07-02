@@ -48,12 +48,20 @@ public class PainelExibirTurmas extends Painel {
         
         add(painelSul, BorderLayout.SOUTH);
     }
-    public void atualizarTabela(List<Turma> turmas) {
+    public void atualizarTabela(List<Turma> turmas, Modelo.Grade gradeAtual) {
         modeloTabela.setRowCount(0); // Limpa a tabela atual
         for (Turma t : turmas) {
-            String alocado = t.getHorarios().isEmpty() ? "Não" : "Sim";
+            boolean temAlocacao = false;
+            if(gradeAtual != null && gradeAtual.getAlocacoes() != null){
+                for(Modelo.Alocacao alocacao : gradeAtual.getAlocacoes()){
+                    if(alocacao.getTurma().equals(t)){
+                        temAlocacao = true;
+                        break;
+                    }
+                }
+            }
+            String alocado = temAlocacao ? "Sim" : "Não";
             String nomeCurso = t.getCurso().toString().replace("_", " ");
-            
             modeloTabela.addRow(new Object[]{nomeCurso, t.getSemestre(), alocado});
         }
     }

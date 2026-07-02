@@ -10,6 +10,9 @@ public class BalanceStrategy implements EstrategiaAlocacao {
         // INVERSÃO CORRETA: Para cada turma, aloca tentando balancear a carga dos professores
         for (Turma turma : turmas) {
             for (Disciplina disciplina : disciplinas) {
+                if(!turma.getDisciplinasDoSemestre().contains(disciplina)){
+                    continue;
+                }
                 boolean alocada = false;
 
                 Professor professorMenosOcupado = null;
@@ -44,9 +47,6 @@ public class BalanceStrategy implements EstrategiaAlocacao {
 
                             Alocacao alocacao = new Alocacao(turma, disciplina, professorMenosOcupado, horario);
                             grade.AdicionarAlocacao(alocacao);
-
-                            // CORREÇÃO: Atualiza a turma para a GUI
-                            turma.setHorarios(horario);
 
                             alocada = true;
                             break;

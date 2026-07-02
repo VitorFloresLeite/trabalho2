@@ -1,5 +1,6 @@
 package Interface;
 
+import Excecoes.*;
 import Controle.*;
 import Modelo.*;
 import java.awt.*;
@@ -50,17 +51,30 @@ public class PainelGerarGrade extends Painel{
             try {
                 List<Disciplina> listaDisciplinas = java.util.Arrays.asList(Disciplina.values());
                 Grade gradeGerada = geradorGrade.gerar(
-                    listaDisciplinas,
-                    controleDados.getProfessores(),
-                    controleDados.getTurmas()
+                        listaDisciplinas,
+                        controleDados.getProfessores(),
+                        controleDados.getTurmas()
                 );
 
                 controlePaineis.setGradeGerada(gradeGerada);
                 JOptionPane.showMessageDialog(this, "Grade gerada com sucesso!");
                 controlePaineis.trocarPainel(PaineisDoPrograma.GRADE);
 
-            } catch (IllegalArgumentException ex) {
+            /*} catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(this, "Atenção: " + ex.getMessage());
+            }*/
+            }catch (ConflitoProfessorException ex){
+                JOptionPane.showMessageDialog(this, "Erro de Alocação: " + ex.getMessage(), "Conflito de professor", JOptionPane.WARNING_MESSAGE);
+
+            }catch (ProfessorIncompativelException ex){
+                JOptionPane.showMessageDialog(this, "Erro de Competência: " + ex.getMessage(), "Incompatibilidade", JOptionPane.WARNING_MESSAGE);
+
+            }catch (TurmaNulaException ex){
+                JOptionPane.showMessageDialog(this, "Erro nos dados da Grade: " + ex.getMessage(), "Não foi possível gerar", JOptionPane.WARNING_MESSAGE);
+
+            }catch (RuntimeException ex){
+                //Para algum outro erro não identificado
+                JOptionPane.showMessageDialog(this, "Atenção: " + ex.getMessage(), "Erro!", JOptionPane.WARNING_MESSAGE);
             }
         });
         gerar.setAlignmentX(CENTER_ALIGNMENT);

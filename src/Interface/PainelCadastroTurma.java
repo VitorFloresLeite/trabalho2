@@ -1,5 +1,6 @@
 package Interface;
 
+import Excecoes.*;
 import Controle.ControlePaineis;
 import Modelo.*;
 import java.awt.*;
@@ -122,27 +123,33 @@ public class PainelCadastroTurma extends Painel {
 
         // Ação para instanciar e salvar o objeto mapeado
         botaoSalvar.addActionListener(e -> {
-            Cursos curso = (Cursos) comboCursos.getSelectedItem();
-            int semestre = (Integer) comboSemestre.getSelectedItem();
-
-            // Instancia o objeto do modelo Turma
-            Turma turma = new Turma(curso, semestre);
-            
-            // Alimenta a lista de horários da turma usando o método setHorarios existente
-            for (Horario horario : horariosSelecionados) {
-                turma.setHorarios(horario);
-            }
-
             try{
+                Cursos curso = (Cursos) comboCursos.getSelectedItem();
+                int semestre = (Integer) comboSemestre.getSelectedItem();
+
+                // Instancia o objeto do modelo Turma
+                Turma turma = new Turma(curso, semestre);
+
+                // Alimenta a lista de horários da turma usando o método setHorarios existente
+                for (Horario horario : horariosSelecionados) {
+                    turma.setHorarios(horario);
+                }
+
                 controle.cadastrarTurma(turma);
                 JOptionPane.showMessageDialog(this,
-                    "Turma cadastrada com sucesso:\n" +
-                            "Curso: " + turma.getCurso().toString().replace('_', ' ') + "\n" +
-                            "Semestre: " + turma.getSemestre() + "º Semestre\n" +
-                            "Quantidade de horários: " + horariosSelecionados.size());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao cadastrar turma: " + ex.getMessage());
-                return;
+                        "Turma cadastrada com sucesso:\n" +
+                                "Curso: " + turma.getCurso().toString().replace('_', ' ') + "\n" +
+                                "Semestre: " + turma.getSemestre() + "º Semestre\n" +
+                                "Quantidade de horários: " + horariosSelecionados.size());
+
+                //limpa a listagem temporaria após salvar
+                horariosSelecionados.clear();
+                modeloHorarios.clear();
+            } catch (TurmaNulaException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar turma: " + ex.getMessage(), "Dados inválidos", JOptionPane.WARNING_MESSAGE);
+
+            } catch (RuntimeException ex){
+                JOptionPane.showMessageDialog(this, "Não foi possível cadastrar a turma: " + ex.getMessage(), "Erro no cadastro", JOptionPane.ERROR_MESSAGE);
             }
             
         });

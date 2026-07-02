@@ -21,5 +21,20 @@ public class PainelInicial extends Painel {
         button2.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.CADASTRO_PROFESSOR));
         button2.setAlignmentX(CENTER_ALIGNMENT);
         add(button2);
+
+        Botao button3 = new Botao("Cadastrar Turma", 10);
+        button3.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.CADASTRO_TURMA));
+        button3.setAlignmentX(CENTER_ALIGNMENT);
+        add(button3);
+
+        Botao button4 = new Botao("Exibir Turmas", 10);
+        button4.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.EXIBIR_TURMAS));
+        button4.setAlignmentX(CENTER_ALIGNMENT);
+        add(button4);
+
+        Botao button5 = new Botao("Exibir Professores", 10);
+        button5.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.EXIBIR_PROFESSORES));
+        button5.setAlignmentX(CENTER_ALIGNMENT);
+        add(button5);
     }
 }

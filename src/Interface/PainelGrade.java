@@ -25,9 +25,9 @@ public class PainelGrade extends Painel{
                 return false;
             }
         };
-        table.getTableHeader().setReorderingAllowed(false);
+        tabelaGrade.getTableHeader().setReorderingAllowed(false);
 
-        JScrollPane scroll = new JScrollPane(table);
+        JScrollPane scroll = new JScrollPane(tabelaGrade);
         scroll.setPreferredSize(new Dimension(600, 200));
         scroll.setMinimumSize(new Dimension(300, 120));
 

@@ -2,6 +2,8 @@ package Modelo;
 
 //Representa o match entre um professor, uma disciplina e um horario;
 
+import Excecoes.ProfessorIncompativelException;
+
 public class Alocacao{
     private final Turma turma;
     private final Disciplina disciplina;
@@ -25,7 +27,7 @@ public class Alocacao{
 
         //validação da regra de negocio: saber se o professor tem competencia para essa disciplina
         if(!professor.temCompetencia(disciplina)){
-            throw new IllegalArgumentException("O professor "+ professor.getNome()+" não tem competencia cadastrada para a disciplina " + disciplina.toString());
+            throw new ProfessorIncompativelException("O professor "+ professor.getNome()+" não tem competencia cadastrada para a disciplina " + disciplina.toString());
         }
 
         this.turma = turma;

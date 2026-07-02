@@ -38,7 +38,17 @@ public class PainelGrade extends Painel{
         button.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.INICIAL));
         button.setAlignmentX(CENTER_ALIGNMENT);
         add(button);
-        
+
+        atualizarGrade(controle.getGradeGerada());
+    }
+
+    public void atualizarGrade(Grade grade) {
+        if (tabelaGrade == null) {
+            return;
+        }
+
+        DadosGrade dadosGrade = ConverterGrade(grade == null ? new Grade() : grade);
+        tabelaGrade.setModel(new DefaultTableModel(dadosGrade.Dados, dadosGrade.Colunas));
     }
 
     private class DadosGrade{

@@ -11,6 +11,9 @@ public class GeradorGrade {
         }
         this.estrategia = estrategia;
     }
+    public GeradorGrade(){
+        this.estrategia=null;
+    }
 
     public Grade gerar(List<Disciplina> disciplinas,
                        List<Professor> professores,

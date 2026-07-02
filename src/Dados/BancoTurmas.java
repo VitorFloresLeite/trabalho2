@@ -1,10 +1,7 @@
 package Dados;
 
-import Excecoes.*;
 import java.util.HashMap;
 import java.util.Map;
-
-
 import Modelo.Turma;
 import Modelo.Cursos; // Necessário importar o enum Cursos
 import java.util.List;
@@ -24,7 +21,7 @@ public class BancoTurmas {
     public void adicionarTurma(Turma turma) {
         // Validação utilizando os atributos reais da sua classe Turma
         if (turma == null || turma.getCurso() == null) { 
-            throw new TurmaNulaException("A turma ou o curso não podem ser nulos.");
+            throw new IllegalArgumentException("A turma ou o curso não podem ser nulos.");
         }
         
         // Cria a chave combinando curso e semestre e insere no mapa

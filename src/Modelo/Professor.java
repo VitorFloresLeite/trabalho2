@@ -10,6 +10,9 @@ public class Professor {
     private List<Horario> disponibilidade;
 
     public Professor(String nome){
+        // if(nome == null || nome.trim().isEmpty()){
+        //     throw new ProfessorNuloException("O nome do professor não pode ser vazio.");
+        // }
         this.nome = nome;
         this.competencias = new ArrayList<>();
         this.disponibilidade = new ArrayList<>();

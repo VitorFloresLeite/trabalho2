@@ -1,6 +1,5 @@
 package Interface;
 
-import Excecoes.*;
 import Controle.ControlePaineis;
 import Modelo.*;
 import java.awt.*;
@@ -124,43 +123,31 @@ public class PainelCadastroProfessor extends Painel {
         });
 
         botaoSalvar.addActionListener(e -> {
-            try{
-                String nome = campoNome.getText().trim();
-                if (nome.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Informe o nome do professor.");
-                    return;
-                }
+            String nome = campoNome.getText().trim();
+            if (nome.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Informe o nome do professor.");
+                return;
+            }
 
-                Professor professor = new Professor(nome);
-                for (JCheckBox caixa : caixasCompetencia) {
-                    if (caixa.isSelected()) {
-                        professor.adicionarCompetencia(Disciplina.valueOf(caixa.getText().replace(' ', '_').toUpperCase()));
-                    }
+            Professor professor = new Professor(nome);
+            for (JCheckBox caixa : caixasCompetencia) {
+                if (caixa.isSelected()) {
+                    professor.adicionarCompetencia(Disciplina.valueOf(caixa.getText().replace(' ', '_').toUpperCase()));
                 }
-                for (Horario horario : horariosSelecionados) {
-                    professor.adicionarDisponibilidade(horario);
-                }
-
+            }
+            for (Horario horario : horariosSelecionados) {
+                professor.adicionarDisponibilidade(horario);
+            }
+            try {
                 controle.cadastrarProfessor(professor);
                 JOptionPane.showMessageDialog(this,
-                        "Professor cadastrado com sucesso:\n" + professor.getNome() + "\n" +
-                                "Competências: " + professor.getCompetencias() + "\n" +
-                                "Disponibilidade: " + professor.getDisponibilidade());
-
-                //limpa o formulario após o cadastro
-                campoNome.setText("");
-                horariosSelecionados.clear();
-                modeloHorarios.clear();
-                for (JCheckBox caixa : caixasCompetencia){
-                    caixa.setSelected(false);
-                }
-
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(this, "Dados inválidos: " + ex.getMessage(), "Erro de validação", JOptionPane.WARNING_MESSAGE);
-
-            } catch (RuntimeException ex){
-                JOptionPane.showMessageDialog(this, "Não foi possível cadastrar o professor:\n" + ex.getMessage(), "Erro no cadastro", JOptionPane.ERROR_MESSAGE);
-            }
+                    "Professor cadastrado com sucesso:\n" + professor.getNome() + "\n" +
+                            "Competências: " + professor.getCompetencias() + "\n" +
+                            "Disponibilidade: " + professor.getDisponibilidade()); 
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar professor: " + ex.getMessage());
+                return;
+            }          
         });
 
         Botao botaoVoltar = new Botao("Voltar", 10);

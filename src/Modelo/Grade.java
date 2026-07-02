@@ -1,6 +1,4 @@
 package Modelo;
-import Excecoes.AlocacaoException;
-
 import java.util.*;
 
 public class Grade {
@@ -17,7 +15,7 @@ public class Grade {
 
     public void AdicionarAlocacao(Alocacao novaAlocacao) {
         if (novaAlocacao == null) {
-            throw new AlocacaoException("A alocação não pode ser nula.");
+            throw new IllegalStateException("A alocação não pode ser nula.");
         }
         this.validador.validar(novaAlocacao, this.getAlocacoes());
         this.alocacoesPorDia.get(novaAlocacao.getHorario().getDia()).add(novaAlocacao);

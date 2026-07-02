@@ -1,10 +1,6 @@
 package Modelo;
 
-import Excecoes.*;
-
 //Representa o match entre um professor, uma disciplina e um horario;
-
-import Excecoes.ProfessorIncompativelException;
 
 public class Alocacao{
     private final Turma turma;
@@ -13,23 +9,23 @@ public class Alocacao{
     private final Horario horario;
 
     public Alocacao(Turma turma, Disciplina disciplina, Professor professor, Horario horario){
-        //validação por contratos: elementos nao podem ser nulos
-        if(turma == null){
-             throw new TurmaNulaException("A turma não pode ser nula.");
-        }
-        if(disciplina == null){
-            throw new DisciplinaNulaException("A disciplina não pode ser nula.");
-        }
-        if(professor == null){
-            throw new ProfessorNuloException("O professor não pode ser nulo.");
-        }
-        if(horario == null){
-            throw new HorarioNuloException("O horario não pode ser nulo.");
-        }
+        // validação por contratos: elementos nao podem ser nulos
+        // if(turma == null){
+        //     throw new TurmaNulaException("A turma não pode ser nula.");
+        // }
+        // if(disciplina == null){
+        //     throw new DisciplinaNulaException("A disciplina não pode ser nula.");
+        // }
+        // if(professor == null){
+        //     throw new ProfessorNuloException("O professor não pode ser nulo.");
+        // }
+        // if(horario == null){
+        //     throw new HorarioNuloException("O horario não pode ser nulo.");
+        // }
 
         //validação da regra de negocio: saber se o professor tem competencia para essa disciplina
         if(!professor.temCompetencia(disciplina)){
-            throw new ProfessorIncompativelException("O professor "+ professor.getNome()+" não tem competencia cadastrada para a disciplina " + disciplina.toString());
+            throw new IllegalArgumentException("O professor "+ professor.getNome()+" não tem competencia cadastrada para a disciplina " + disciplina.toString());
         }
 
         this.turma = turma;

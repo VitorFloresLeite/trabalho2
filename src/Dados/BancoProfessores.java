@@ -1,6 +1,4 @@
 package Dados;
-
-import Excecoes.*;
 import Modelo.*;
 import java.util.HashMap;
 import java.util.Map; // Lembre-se de importar o Map
@@ -15,7 +13,7 @@ public class BancoProfessores {
 
     public void adicionarProfessor(Professor professor) {
         if (professor == null || professor.getNome() == null) { // Ajustado para getNome() baseado na sua classe Professor
-            throw new ConflitoProfessorException("O professor ou o nome do professor não pode ser nulo.");
+            throw new IllegalArgumentException("O professor ou o nome do professor não pode ser nulo.");
         }
         professores.put(professor.getNome(), professor);
     }

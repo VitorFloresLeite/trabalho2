@@ -1,8 +1,5 @@
 package Modelo;
 
-import Excecoes.ConflitoHorarioException;
-import Excecoes.ConflitoProfessorException;
-
 import java.util.List;
 
 public class ValidadorConflitoPadrao implements ValidaAlocacaoStrategy {
@@ -22,14 +19,14 @@ public class ValidadorConflitoPadrao implements ValidaAlocacaoStrategy {
                 
                 // 1. Verifica conflito de Professor
                 if (conflito.getProfessor().getNome().equals(novaAlocacao.getProfessor().getNome())) {
-                    throw new ConflitoProfessorException("Conflito de professor: o professor " +
+                    throw new IllegalStateException("Conflito de Horário: o professor " + 
                             novaAlocacao.getProfessor().getNome() + " já possui aula neste horário.");
                 }
                 
                 // 2. Verifica conflito de Turma
                 if (conflito.getTurma().getCurso() == novaAlocacao.getTurma().getCurso() && 
                     conflito.getTurma().getSemestre() == novaAlocacao.getTurma().getSemestre()) {
-                    throw new ConflitoHorarioException("Conflito de Horário: A turma de " +
+                    throw new IllegalStateException("Conflito de Horário: A turma de " + 
                             novaAlocacao.getTurma().getCurso() + " (Semestre " + 
                             novaAlocacao.getTurma().getSemestre() + ") já possui aula neste horário.");
                 }

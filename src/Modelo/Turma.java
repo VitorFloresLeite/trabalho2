@@ -10,6 +10,14 @@ public class Turma{
     public Turma(Cursos curso, int semestre){
         this.curso = curso;
         this.semestre = semestre;
+        // try{
+        //     if(semestre < 1 || semestre > 8){
+        //         throw new SemestreInvalidoException("Semestre deve ser entre 1 e 8.");
+        //     }
+        //     this.semestre = semestre;
+        // } catch (SemestreInvalidoException e){
+        //     System.out.println(e.getMessage());
+        // }
         this.horarios = new ArrayList<>();
     }
     public Cursos getCurso() {

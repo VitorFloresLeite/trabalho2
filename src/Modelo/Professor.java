@@ -48,7 +48,7 @@ public class Professor {
 
     @Override
     public String toString(){
-        return "Professor: " + nome + ", Competências: " + getCompetencias().toString();//, Disponibilidade: " + disponibilidade.toString()*/";
+        return "Professor: " + nome + ", Competências: " + getCompetencias().toString();
     }
 }
 

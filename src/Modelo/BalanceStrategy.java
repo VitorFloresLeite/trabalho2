@@ -44,10 +44,10 @@ public class BalanceStrategy implements EstrategiaAlocacao {
 
                             Alocacao alocacao = new Alocacao(turma, disciplina, professorMenosOcupado, horario);
                             grade.AdicionarAlocacao(alocacao);
-                            
+
                             // CORREÇÃO: Atualiza a turma para a GUI
-                            turma.setHorarios(horario); 
-                            
+                            turma.setHorarios(horario);
+
                             alocada = true;
                             break;
 

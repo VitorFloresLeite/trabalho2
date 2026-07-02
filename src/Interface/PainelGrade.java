@@ -7,8 +7,6 @@ import java.util.List;
 import javax.swing.*;
 
 public class PainelGrade extends Painel{
-    // private static final int TABLE_TOP_OFFSET = 10;
-    // private static final int TABLE_SIDE_OFFSET = 10;
     public PainelGrade(String titulo, ControlePaineis controle) {
         super(titulo, controle);
     }

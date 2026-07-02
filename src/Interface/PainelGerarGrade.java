@@ -1,19 +1,11 @@
 package Interface;
 
-<<<<<<< HEAD
 import Controle.*;
 import Modelo.*;
-=======
-import Controle.ControlePaineis;
-import Controle.ControleDados;
-import Excecoes.DadosInsuficientesException;
-import Modelo.BalanceStrategy;
-import Modelo.SimpleStrategy;
-import Modelo.GeradorGrade;
-import Modelo.Grade;
->>>>>>> 523dc74e82775f601b9be4763974b936c061c838
 import java.awt.*;
 import javax.swing.*;
+import Excecoes.*;
+import java.util.List;
 
 public class PainelGerarGrade extends Painel {
 
@@ -78,35 +70,23 @@ public class PainelGerarGrade extends Painel {
 
         btnGerar.addActionListener(e -> {
             try {
-<<<<<<< HEAD
                 List<Disciplina> listaDisciplinas = java.util.Arrays.asList(Disciplina.values());
                 Grade gradeGerada = geradorGrade.gerar(
                     listaDisciplinas,
                     controleDados.getProfessores(),
                     controleDados.getTurmas()
-=======
-                Grade novaGrade = geradorGrade.gerar(
-                        java.util.Arrays.asList(Modelo.Disciplina.values()),
-                        controleDados.getProfessores(),
-                        controleDados.getTurmas()
->>>>>>> 523dc74e82775f601b9be4763974b936c061c838
                 );
 
-                controle.setGradeGerada(novaGrade);
+                controle.setGradeGerada(gradeGerada);
                 JOptionPane.showMessageDialog(this, "Grade Horária gerada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 controle.trocarPainel(PaineisDoPrograma.GRADE);
 
-<<<<<<< HEAD
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(this, "Atenção: " + ex.getMessage());
-=======
             } catch (DadosInsuficientesException ex) {
                 // SINAL DE ALERTA DO ENUNCIADO RESOLVIDO: Tratamento de erro de regra de negócio específico!
                 JOptionPane.showMessageDialog(this, "Não foi possível gerar a grade: " + ex.getMessage(), "Faltam Dados", JOptionPane.WARNING_MESSAGE);
             } catch (RuntimeException ex) {
                 // Outras exceções não previstas do sistema
                 JOptionPane.showMessageDialog(this, "Erro interno: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
->>>>>>> 523dc74e82775f601b9be4763974b936c061c838
             }
         });
 

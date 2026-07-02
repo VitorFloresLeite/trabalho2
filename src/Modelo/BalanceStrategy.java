@@ -4,7 +4,7 @@ import java.util.List;
 public class BalanceStrategy implements EstrategiaAlocacao {
 
     @Override
-    public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas, List<Horario> horarios) {
+    public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas) {
         Grade grade = new Grade();
 
         // Para cada disciplina, aloca tentando balancear carga

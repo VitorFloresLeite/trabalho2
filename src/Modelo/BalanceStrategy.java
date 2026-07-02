@@ -56,11 +56,10 @@ public class BalanceStrategy implements EstrategiaAlocacao {
                         }
                     }
                 }
-            }
 
-            if (!alocada) {
-                System.out.println("Aviso: Não foi possível alocar a disciplina " +
-                        disciplina + " com balanceamento de carga.");
+                if (!alocada) {
+                    System.out.println("Aviso: Não foi possível alocar " + disciplina + " com balanceamento para " + turma.getCurso());
+                }
             }
         }
 

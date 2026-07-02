@@ -1,4 +1,6 @@
 package Modelo;
+import Excecoes.ConflitoHorarioException;
+import Excecoes.ConflitoProfessorException;
 import java.util.List;
 
 public class SimpleStrategy implements EstrategiaAlocacao {
@@ -7,12 +9,11 @@ public class SimpleStrategy implements EstrategiaAlocacao {
     public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas) {
         Grade grade = new Grade();
 
-        // INVERSÃO CORRETA: Para CADA turma, tenta alocar TODAS as disciplinas
         for (Turma turma : turmas) {
-            for (Disciplina disciplina : disciplinas) {
+            // INVERSÃO CORRETA E AGORA OTIMIZADA: Tenta alocar APENAS as disciplinas esperadas da turma
+            for (Disciplina disciplina : turma.getDisciplinasEsperadas()) {
                 boolean alocada = false;
 
-                // Encontra um professor com competência
                 for (Professor professor : professores) {
                     if (!professor.temCompetencia(disciplina)) {
                         continue;
@@ -21,16 +22,16 @@ public class SimpleStrategy implements EstrategiaAlocacao {
                         try {
                             Alocacao alocacao = new Alocacao(turma, disciplina, professor, horario);
                             grade.AdicionarAlocacao(alocacao);
-                            turma.setHorarios(horario); 
+                            // turma.setHorarios removido!
                             alocada = true;
                             break;
-                        } catch (IllegalStateException e) {
-                            continue;
+                        } catch (ConflitoHorarioException | ConflitoProfessorException e) {
+                            continue; // Tenta o próximo horário
                         }
                     }
                     if (alocada) break;
                 }
-                
+
                 if (!alocada) {
                     System.out.println("Aviso: Não foi possível alocar " + disciplina + " para a turma de " + turma.getCurso());
                 }

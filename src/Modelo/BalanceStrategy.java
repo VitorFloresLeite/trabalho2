@@ -1,4 +1,6 @@
 package Modelo;
+import Excecoes.ConflitoHorarioException;
+import Excecoes.ConflitoProfessorException;
 import java.util.List;
 
 public class BalanceStrategy implements EstrategiaAlocacao {
@@ -7,9 +9,9 @@ public class BalanceStrategy implements EstrategiaAlocacao {
     public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas) {
         Grade grade = new Grade();
 
-        // INVERSÃO CORRETA: Para cada turma, aloca tentando balancear a carga dos professores
         for (Turma turma : turmas) {
-            for (Disciplina disciplina : disciplinas) {
+            // Utiliza as disciplinas da própria turma
+            for (Disciplina disciplina : turma.getDisciplinasEsperadas()) {
                 boolean alocada = false;
 
                 Professor professorMenosOcupado = null;
@@ -17,9 +19,7 @@ public class BalanceStrategy implements EstrategiaAlocacao {
 
                 // Busca o professor com competência e menos carga atual
                 for (Professor professor : professores) {
-                    if (!professor.temCompetencia(disciplina)) {
-                        continue;
-                    }
+                    if (!professor.temCompetencia(disciplina)) continue;
 
                     int cargaAtual = 0;
                     for (Alocacao a : grade.getAlocacoes()) {
@@ -38,20 +38,11 @@ public class BalanceStrategy implements EstrategiaAlocacao {
                 if (professorMenosOcupado != null) {
                     for (Horario horario : professorMenosOcupado.getDisponibilidade()) {
                         try {
-                            if (!professorMenosOcupado.getDisponibilidade().contains(horario)) {
-                                continue;
-                            }
-
                             Alocacao alocacao = new Alocacao(turma, disciplina, professorMenosOcupado, horario);
                             grade.AdicionarAlocacao(alocacao);
-                            
-                            // CORREÇÃO: Atualiza a turma para a GUI
-                            turma.setHorarios(horario); 
-                            
                             alocada = true;
                             break;
-
-                        } catch (IllegalStateException e) {
+                        } catch (ConflitoHorarioException | ConflitoProfessorException e) {
                             continue;
                         }
                     }

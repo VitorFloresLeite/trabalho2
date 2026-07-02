@@ -2,7 +2,8 @@ package Modelo;
 
 import java.util.List;
 
-public class ValidadorConflitoPadrao implements ValidaAlocacaoStrategy{
+public class ValidadorConflitoPadrao implements ValidaAlocacaoStrategy {
+    
     @Override
     public void validar(Alocacao novaAlocacao, List<Alocacao> alocacoesExistentes) throws IllegalStateException{
         //predicado para verificar se o horario coincide (Dia, Turno, Periodo)

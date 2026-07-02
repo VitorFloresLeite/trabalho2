@@ -2,6 +2,7 @@ package Controle; // Ou em um pacote chamado 'Servicos'
 
 import Dados.*;
 import Modelo.*;
+import java.util.List;
 
 public class ControleDados {
     private final BancoProfessores bancoProfessores;
@@ -26,5 +27,11 @@ public class ControleDados {
     }
     public Turma buscarTurma(Cursos curso, int semestre) {
         return bancoTurmas.buscarTurma(curso, semestre);
+    }
+    public List<Professor> getProfessores() {
+        return bancoProfessores.getTodosProfessores();
+    }
+    public List<Turma> getTurmas() {
+        return bancoTurmas.getTodasTurmas();
     }
 }

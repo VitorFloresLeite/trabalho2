@@ -13,7 +13,8 @@ public class ControlePaineis {
     private final PainelExibirTurmas exibirTurmas = new PainelExibirTurmas("Exibir Turmas", this);
     private final PainelExibirProfessores exibirProfessores = new PainelExibirProfessores("Exibir Professores", this);
 
-    private ControleDados controleDados=new ControleDados();
+    private final ControleDados controleDados;
+    private Grade gradeGerada;
 
     public ControlePaineis(JanelaPrincipal janelaPrincipal) {
         this.janelaPrincipal = janelaPrincipal;

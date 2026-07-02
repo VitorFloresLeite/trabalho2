@@ -3,51 +3,55 @@ import Interface.*;
 import Modelo.*;
 
 public class ControlePaineis {
-    private JanelaPrincipal janelaPrincipal;
+    private final JanelaPrincipal janelaPrincipal;
     private static Painel painelAtual;
 
-    private Painel painelInicial=new PainelInicial("inicial", this);
-    private Painel grade=new PainelGrade("Grade", this);
-    private Painel cadastroProfessor=new PainelCadastroProfessor("Cadastro de Professor", this);
-    private Painel cadastroTurma=new PainelCadastroTurma("Cadastro de Turma", this);
-    private PainelExibirTurmas exibirTurmas=new PainelExibirTurmas("Exibir Turmas", this);
-    private PainelExibirProfessores exibirProfessores=new PainelExibirProfessores("Exibir Professores", this);
-
+    private final Painel painelInicial = new PainelInicial("inicial", this);
+    private final PainelGrade grade = new PainelGrade("Grade", this);
+    private final Painel cadastroProfessor = new PainelCadastroProfessor("Cadastro de Professor", this);
+    private final Painel cadastroTurma = new PainelCadastroTurma("Cadastro de Turma", this);
+    private final PainelExibirTurmas exibirTurmas = new PainelExibirTurmas("Exibir Turmas", this);
+    private final PainelExibirProfessores exibirProfessores = new PainelExibirProfessores("Exibir Professores", this);
 
     private ControleDados controleDados=new ControleDados();
 
     public ControlePaineis(JanelaPrincipal janelaPrincipal) {
         this.janelaPrincipal = janelaPrincipal;
         this.controleDados = new ControleDados();
-        painelAtual=new PainelInicial("inicial", this);
+        painelAtual = new PainelInicial("inicial", this);
         this.janelaPrincipal.setPainel(painelAtual);
     }
 
     public void trocarPainel(PaineisDoPrograma painel){
         switch(painel){
             case PaineisDoPrograma.INICIAL: 
-                painelAtual=painelInicial;
+                painelAtual = painelInicial;
                 janelaPrincipal.setPainel(painelAtual);
                 break;
             case PaineisDoPrograma.GRADE: 
-                painelAtual=grade;
+                painelAtual = grade;
+                grade.atualizarGrade(gradeGerada);
+                janelaPrincipal.setPainel(painelAtual);
+                break;
+            case PaineisDoPrograma.GERAR_GRADE:
+                painelAtual = new PainelGerarGrade("Gerar Grade", this, controleDados);
                 janelaPrincipal.setPainel(painelAtual);
                 break;
             case PaineisDoPrograma.CADASTRO_PROFESSOR:
-                painelAtual=cadastroProfessor;
-                janelaPrincipal.setPainel(painelAtual);;
+                painelAtual = cadastroProfessor;
+                janelaPrincipal.setPainel(painelAtual);
                 break;
             case PaineisDoPrograma.CADASTRO_TURMA:
-                painelAtual=cadastroTurma;
+                painelAtual = cadastroTurma;
                 janelaPrincipal.setPainel(painelAtual);
                 break;
             case PaineisDoPrograma.EXIBIR_TURMAS:
-                painelAtual=exibirTurmas;
+                painelAtual = exibirTurmas;
                 exibirTurmas.atualizarTabela(controleDados.getTurmas());
                 janelaPrincipal.setPainel(painelAtual);
                 break;
             case PaineisDoPrograma.EXIBIR_PROFESSORES:
-                painelAtual=exibirProfessores;
+                painelAtual = exibirProfessores;
                 exibirProfessores.atualizarTabela(controleDados.getProfessores());
                 janelaPrincipal.setPainel(painelAtual);
                 break;

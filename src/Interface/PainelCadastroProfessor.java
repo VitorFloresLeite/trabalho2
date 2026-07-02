@@ -1,11 +1,7 @@
 package Interface;
 
-import Excecoes.*;
 import Controle.ControlePaineis;
-import Modelo.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 
 public class PainelCadastroProfessor extends Painel {
@@ -16,155 +12,61 @@ public class PainelCadastroProfessor extends Painel {
 
     @Override
     protected void inicializarComponentes() {
-        setLayout(new BorderLayout(10, 10));
-        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // GridBagLayout centraliza o formulário vertical e horizontalmente na tela
+        setLayout(new GridBagLayout());
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JPanel formulario = new JPanel();
-        formulario.setLayout(new BoxLayout(formulario, BoxLayout.Y_AXIS));
-        formulario.setOpaque(false);
-        formulario.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        // Container que limita o tamanho máximo do formulário
+        JPanel painelFormulario = new JPanel();
+        painelFormulario.setLayout(new BoxLayout(painelFormulario, BoxLayout.Y_AXIS));
+        painelFormulario.setOpaque(false);
+        painelFormulario.setPreferredSize(new Dimension(450, 400));
+        painelFormulario.setMaximumSize(new Dimension(450, 400));
 
-        JPanel painelNome = new JPanel(new BorderLayout(5, 5));
-        painelNome.setOpaque(false);
-        JLabel labelNome = new JLabel("Nome do professor:");
-        labelNome.setForeground(Color.WHITE);
-        JTextField campoNome = new JTextField();
-        painelNome.add(labelNome, BorderLayout.NORTH);
-        painelNome.add(campoNome, BorderLayout.CENTER);
-        formulario.add(painelNome);
-        formulario.add(Box.createVerticalStrut(10));
+        // Título Interno
+        JLabel lblTitulo = new JLabel("Cadastrar Novo Professor");
+        lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 16));
+        lblTitulo.setForeground(Color.WHITE);
+        lblTitulo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelFormulario.add(lblTitulo);
+        painelFormulario.add(Box.createVerticalStrut(20));
 
-        JPanel painelCompetencias = new JPanel();
-        painelCompetencias.setLayout(new BoxLayout(painelCompetencias, BoxLayout.Y_AXIS));
-        painelCompetencias.setOpaque(false);
-        JLabel labelCompetencias = new JLabel("Competências:");
-        labelCompetencias.setForeground(Color.WHITE);
-        painelCompetencias.add(labelCompetencias);
+        // Campo Nome
+        JLabel lblNome = new JLabel("Nome Completo:");
+        lblNome.setForeground(Color.WHITE);
+        lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JPanel gradesCompetencias = new JPanel(new GridLayout(0, 2, 8, 5));
-        gradesCompetencias.setOpaque(false);
-        List<JCheckBox> caixasCompetencia = new ArrayList<>();
-        for (Disciplina disciplina : Disciplina.values()) {
-            JCheckBox checkBox = new JCheckBox(disciplina.toString().replace("_", " "));
-            checkBox.setOpaque(false);
-            checkBox.setForeground(Color.WHITE);
-            caixasCompetencia.add(checkBox);
-            gradesCompetencias.add(checkBox);
-        }
-        painelCompetencias.add(gradesCompetencias);
-        formulario.add(painelCompetencias);
-        formulario.add(Box.createVerticalStrut(10));
+        JTextField txtNome = new JTextField();
+        txtNome.setAlignmentX(Component.LEFT_ALIGNMENT);
+        // REFINO: Impede que o campo estique verticalmente mantendo uma altura elegante
+        txtNome.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
 
-        JPanel painelDisponibilidade = new JPanel();
-        painelDisponibilidade.setLayout(new BoxLayout(painelDisponibilidade, BoxLayout.Y_AXIS));
-        painelDisponibilidade.setOpaque(false);
-        JLabel labelDisponibilidade = new JLabel("Disponibilidade:");
-        labelDisponibilidade.setForeground(Color.WHITE);
-        painelDisponibilidade.add(labelDisponibilidade);
+        painelFormulario.add(lblNome);
+        painelFormulario.add(Box.createVerticalStrut(5));
+        painelFormulario.add(txtNome);
+        painelFormulario.add(Box.createVerticalStrut(15));
 
-        JPanel painelHorario = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 5));
-        painelHorario.setOpaque(false);
-        JComboBox<Dias> comboDias = new JComboBox<>(Dias.values());
-        JComboBox<Turnos> comboTurnos = new JComboBox<>(Turnos.values());
-        JComboBox<Periodos> comboPeriodos = new JComboBox<>(Periodos.values());
-        painelHorario.add(new JLabel("Dia:"));
-        painelHorario.add(comboDias);
-        painelHorario.add(new JLabel("Turno:"));
-        painelHorario.add(comboTurnos);
-        painelHorario.add(new JLabel("Período:"));
-        painelHorario.add(comboPeriodos);
-        painelDisponibilidade.add(painelHorario);
+        // Botões de Ação
+        JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        painelBotoes.setOpaque(false);
+        painelBotoes.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        DefaultListModel<String> modeloHorarios = new DefaultListModel<>();
-        JList<String> listaHorarios = new JList<>(modeloHorarios);
-        listaHorarios.setVisibleRowCount(4);
-        listaHorarios.setSelectionBackground(new Color(70, 130, 180));
-        JScrollPane scrollHorarios = new JScrollPane(listaHorarios);
-        painelDisponibilidade.add(Box.createVerticalStrut(5));
-        painelDisponibilidade.add(scrollHorarios);
+        Botao btnSalvar = new Botao("Salvar Professor", 10);
+        btnSalvar.setPreferredSize(new Dimension(150, 35));
+        Botao btnVoltar = new Botao("Voltar", 10);
+        btnVoltar.setPreferredSize(new Dimension(100, 35));
 
-        JPanel painelBotoesHorario = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        painelBotoesHorario.setOpaque(false);
-        Botao botaoAdicionarHorario = new Botao("Adicionar horário", 10);
-        Botao botaoRemoverHorario = new Botao("Remover seleção", 10);
-        painelBotoesHorario.add(botaoAdicionarHorario);
-        painelBotoesHorario.add(botaoRemoverHorario);
-        painelDisponibilidade.add(painelBotoesHorario);
-        formulario.add(painelDisponibilidade);
+        painelBotoes.add(btnSalvar);
+        painelBotoes.add(Box.createHorizontalStrut(10));
+        painelBotoes.add(btnVoltar);
 
-        JPanel painelAcoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        painelAcoes.setOpaque(false);
-        Botao botaoSalvar = new Botao("Salvar professor", 10);
-        painelAcoes.add(botaoSalvar);
-        formulario.add(Box.createVerticalStrut(10));
-        formulario.add(painelAcoes);
+        painelFormulario.add(Box.createVerticalStrut(10));
+        painelFormulario.add(painelBotoes);
 
-        add(formulario, BorderLayout.CENTER);
+        // Adiciona o container limitado ao painel centralizado
+        add(painelFormulario);
 
-        List<Horario> horariosSelecionados = new ArrayList<>();
-
-        botaoAdicionarHorario.addActionListener(e -> {
-            Horario horario = new Horario(
-                    (Dias) comboDias.getSelectedItem(),
-                    (Turnos) comboTurnos.getSelectedItem(),
-                    (Periodos) comboPeriodos.getSelectedItem()
-            );
-            if (!horariosSelecionados.contains(horario)) {
-                horariosSelecionados.add(horario);
-                modeloHorarios.addElement(horario.toString());
-            }
-        });
-
-        botaoRemoverHorario.addActionListener(e -> {
-            int indiceSelecionado = listaHorarios.getSelectedIndex();
-            if (indiceSelecionado >= 0) {
-                horariosSelecionados.remove(indiceSelecionado);
-                modeloHorarios.remove(indiceSelecionado);
-            }
-        });
-
-        botaoSalvar.addActionListener(e -> {
-            try{
-                String nome = campoNome.getText().trim();
-                if (nome.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Informe o nome do professor.");
-                    return;
-                }
-
-                Professor professor = new Professor(nome);
-                for (JCheckBox caixa : caixasCompetencia) {
-                    if (caixa.isSelected()) {
-                        professor.adicionarCompetencia(Disciplina.valueOf(caixa.getText().replace(' ', '_').toUpperCase()));
-                    }
-                }
-                for (Horario horario : horariosSelecionados) {
-                    professor.adicionarDisponibilidade(horario);
-                }
-
-                controle.cadastrarProfessor(professor);
-                JOptionPane.showMessageDialog(this,
-                        "Professor cadastrado com sucesso:\n" + professor.getNome() + "\n" +
-                                "Competências: " + professor.getCompetencias() + "\n" +
-                                "Disponibilidade: " + professor.getDisponibilidade());
-
-                //limpa o formulario após o cadastro
-                campoNome.setText("");
-                horariosSelecionados.clear();
-                modeloHorarios.clear();
-                for (JCheckBox caixa : caixasCompetencia){
-                    caixa.setSelected(false);
-                }
-
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(this, "Dados inválidos: " + ex.getMessage(), "Erro de validação", JOptionPane.WARNING_MESSAGE);
-
-            } catch (RuntimeException ex){
-                JOptionPane.showMessageDialog(this, "Não foi possível cadastrar o professor:\n" + ex.getMessage(), "Erro no cadastro", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
-        Botao botaoVoltar = new Botao("Voltar", 10);
-        botaoVoltar.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.INICIAL));
-        painelAcoes.add(botaoVoltar);
+        // Ações dos botões
+        btnVoltar.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.INICIAL));
     }
 }

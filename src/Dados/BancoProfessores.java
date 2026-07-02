@@ -2,6 +2,7 @@ package Dados;
 import Modelo.*;
 import java.util.HashMap;
 import java.util.Map; // Lembre-se de importar o Map
+import java.util.List;
 
 public class BancoProfessores {
     private final Map<String, Professor> professores;
@@ -19,5 +20,9 @@ public class BancoProfessores {
 
     public Professor buscarProfessor(String nome) {
         return professores.get(nome);
+    }
+
+    public List<Professor> getTodosProfessores() {
+        return new java.util.ArrayList<>(professores.values());
     }
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import Modelo.Turma;
 import Modelo.Cursos; // Necessário importar o enum Cursos
+import java.util.List;
 
 public class BancoTurmas {
     private final Map<String, Turma> turmas;
@@ -32,5 +33,8 @@ public class BancoTurmas {
     public Turma buscarTurma(Cursos curso, int semestre) {
         String chave = gerarChave(curso, semestre);
         return turmas.get(chave);
+    }
+    public List<Turma> getTodasTurmas() {
+        return new java.util.ArrayList<>(turmas.values());
     }
 }

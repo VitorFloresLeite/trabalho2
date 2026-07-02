@@ -1,6 +1,4 @@
 package Modelo;
-import Excecoes.ConflitoHorarioException;
-import Excecoes.ConflitoProfessorException;
 import java.util.List;
 
 public class SimpleStrategy implements EstrategiaAlocacao {
@@ -9,10 +7,11 @@ public class SimpleStrategy implements EstrategiaAlocacao {
     public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas) {
         Grade grade = new Grade();
 
+
         for (Turma turma : turmas) {
-            // INVERSÃO CORRETA E AGORA OTIMIZADA: Tenta alocar APENAS as disciplinas esperadas da turma
-            for (Disciplina disciplina : turma.getDisciplinasEsperadas()) {
+            for (Disciplina disciplina : disciplinas) {
                 boolean alocada = false;
+
 
                 for (Professor professor : professores) {
                     if (!professor.temCompetencia(disciplina)) {
@@ -22,11 +21,11 @@ public class SimpleStrategy implements EstrategiaAlocacao {
                         try {
                             Alocacao alocacao = new Alocacao(turma, disciplina, professor, horario);
                             grade.AdicionarAlocacao(alocacao);
-                            // turma.setHorarios removido!
+                            turma.setHorarios(horario);
                             alocada = true;
                             break;
-                        } catch (ConflitoHorarioException | ConflitoProfessorException e) {
-                            continue; // Tenta o próximo horário
+                        } catch (IllegalStateException e) {
+                            continue;
                         }
                     }
                     if (alocada) break;

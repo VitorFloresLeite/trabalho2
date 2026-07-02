@@ -32,18 +32,4 @@ public class Grade {
     public Queue<Alocacao> getAlocacoesPorDia(Dias dia) {
         return new LinkedList<>(alocacoesPorDia.get(dia));
     }
-
-    public void exibirGradeTeste() {
-        System.out.println("\n========== GRADE DE HORÁRIOS ==========");
-        List<Alocacao> alocacoes = getAlocacoes();
-        if (alocacoes.isEmpty()) {
-            System.out.println("A Grade está vazia");
-        } else {
-            for (Alocacao alocacao : alocacoes) {
-                System.out.println(alocacao.toString());
-                System.out.println("---------------------------------------");
-            }
-        }
-        System.out.println("=======================================\n");
-    }
 }

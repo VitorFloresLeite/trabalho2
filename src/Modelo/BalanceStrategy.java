@@ -36,7 +36,7 @@ public class BalanceStrategy implements EstrategiaAlocacao {
 
                 // Usa o professor com menos carga e tenta encontrar um horário livre
                 if (professorMenosOcupado != null) {
-                    for (Horario horario : horarios) {
+                    for (Horario horario : professorMenosOcupado.getDisponibilidade()) {
                         try {
                             if (!professorMenosOcupado.getDisponibilidade().contains(horario)) {
                                 continue;

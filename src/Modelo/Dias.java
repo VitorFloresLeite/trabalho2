@@ -1,5 +1,5 @@
 package Modelo;
 
 public enum Dias {
-    SEGUNDA, TERCA, QUARTA, QUINTA, SEXTA, SABADO, DOMINGO
+    SEGUNDA, TERCA, QUARTA, QUINTA, SEXTA
 }

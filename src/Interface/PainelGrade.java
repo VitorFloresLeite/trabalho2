@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class PainelGrade extends Painel{
     private JTable tabelaGrade;
@@ -50,6 +51,44 @@ public class PainelGrade extends Painel{
 
         DadosGrade dadosGrade = ConverterGrade(grade == null ? new Grade() : grade);
         tabelaGrade.setModel(new DefaultTableModel(dadosGrade.Dados, dadosGrade.Colunas));
+        // Use a multi-line cell renderer so long strings (alocacao.toString()) wrap
+        TableCellRenderer multiRenderer = new MultiLineCellRenderer();
+        for (int c = 0; c < tabelaGrade.getColumnCount(); c++) {
+            tabelaGrade.getColumnModel().getColumn(c).setCellRenderer(multiRenderer);
+            tabelaGrade.getColumnModel().getColumn(c).setPreferredWidth(160); // adjust as needed
+        }
+
+        // Set a sensible default row height; renderer will expand rows as needed
+        tabelaGrade.setRowHeight(48);
+    }
+
+    // Renderer that wraps text and adjusts row height
+    private static class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
+        public MultiLineCellRenderer() {
+            setLineWrap(true);
+            setWrapStyleWord(true);
+            setOpaque(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            setText(value == null ? "" : value.toString());
+            setFont(table.getFont());
+            if (isSelected) {
+                setBackground(table.getSelectionBackground());
+                setForeground(table.getSelectionForeground());
+            } else {
+                setBackground(table.getBackground());
+                setForeground(table.getForeground());
+            }
+
+            // Calculate preferred height and update row height if necessary
+            int prefHeight = getPreferredSize().height;
+            if (table.getRowHeight(row) < prefHeight) {
+                table.setRowHeight(row, prefHeight);
+            }
+            return this;
+        }
     }
 
     private class DadosGrade{

@@ -1,11 +1,11 @@
 package Interface;
 
 import Controle.*;
+import Excecoes.*;
 import Modelo.*;
 import java.awt.*;
-import javax.swing.*;
-import Excecoes.*;
 import java.util.List;
+import javax.swing.*;
 
 public class PainelGerarGrade extends Painel {
 
@@ -91,5 +91,10 @@ public class PainelGerarGrade extends Painel {
         });
 
         add(btnGerar);
+
+        Botao button = new Botao("Voltar ao painel inicial", 10);
+        button.addActionListener(e -> controle.trocarPainel(PaineisDoPrograma.INICIAL));
+        button.setAlignmentX(CENTER_ALIGNMENT);
+        add(button);
     }
 }

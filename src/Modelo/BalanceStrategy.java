@@ -7,7 +7,6 @@ public class BalanceStrategy implements EstrategiaAlocacao {
     public Grade gerar(List<Disciplina> disciplinas, List<Professor> professores, List<Turma> turmas) {
         Grade grade = new Grade();
 
-        // INVERSÃO CORRETA: Para cada turma, aloca tentando balancear a carga dos professores
         for (Turma turma : turmas) {
             for (Disciplina disciplina : disciplinas) {
                 boolean alocada = false;
@@ -34,7 +33,6 @@ public class BalanceStrategy implements EstrategiaAlocacao {
                     }
                 }
 
-                // Usa o professor com menos carga e tenta encontrar um horário livre
                 if (professorMenosOcupado != null) {
                     for (Horario horario : professorMenosOcupado.getDisponibilidade()) {
                         try {
@@ -45,7 +43,6 @@ public class BalanceStrategy implements EstrategiaAlocacao {
                             Alocacao alocacao = new Alocacao(turma, disciplina, professorMenosOcupado, horario);
                             grade.AdicionarAlocacao(alocacao);
 
-                            // CORREÇÃO: Atualiza a turma para a GUI
                             turma.setHorarios(horario);
 
                             alocada = true;

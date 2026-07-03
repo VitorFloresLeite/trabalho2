@@ -17,7 +17,7 @@ public class PainelGrade extends Painel{
     @Override
     protected void inicializarComponentes() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
+        setBorder(BorderFactory.createEmptyBorder(20, 10, 500, 10));
 
         tabelaGrade = new JTable() {
             @Override
@@ -25,6 +25,7 @@ public class PainelGrade extends Painel{
                 return false;
             }
         };
+        
         tabelaGrade.getTableHeader().setReorderingAllowed(false);
 
         JScrollPane scroll = new JScrollPane(tabelaGrade);
@@ -72,7 +73,7 @@ public class PainelGrade extends Painel{
             int col = a.getHorario().getDia().ordinal();
             if (col < 0 || col >= 5) continue;
             int row = a.getHorario().getTurno().ordinal() * 2 + a.getHorario().getPeriodo().ordinal();
-            dadoss[row][col] = a.getDisciplina().toString();
+            dadoss[row][col] = a.toString();
         }
         return new DadosGrade(colunas, dadoss);
     }

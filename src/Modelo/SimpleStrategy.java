@@ -1,4 +1,6 @@
 package Modelo;
+import Excecoes.ConflitoHorarioException;
+import Excecoes.ConflitoProfessorException;
 import java.util.List;
 
 public class SimpleStrategy implements EstrategiaAlocacao {
@@ -24,8 +26,8 @@ public class SimpleStrategy implements EstrategiaAlocacao {
                             turma.setHorarios(horario);
                             alocada = true;
                             break;
-                        } catch (IllegalStateException e) {
-                            continue;
+                        } catch (ConflitoHorarioException | ConflitoProfessorException e) {
+                            continue; // Captura o conflito corretamente e continua o laço para o próximo horário
                         }
                     }
                     if (alocada) break;

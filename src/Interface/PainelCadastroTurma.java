@@ -26,7 +26,9 @@ public class PainelCadastroTurma extends Painel {
         // Seleção do Curso (Enum Cursos)
         JPanel painelCurso = new JPanel(new BorderLayout(5, 5));
         painelCurso.setOpaque(false);
+        painelCurso.setMaximumSize(new Dimension(300, 20));
         JLabel labelCurso = new JLabel("Curso do Semestre:");
+        labelCurso.setFont(new Font("Arial", Font.BOLD, 15));
         labelCurso.setForeground(Color.WHITE);
         JComboBox<Cursos> comboCursos = new JComboBox<>(Cursos.values());
         painelCurso.add(labelCurso, BorderLayout.NORTH);
@@ -37,7 +39,9 @@ public class PainelCadastroTurma extends Painel {
         // Seleção do Semestre (combo numérico baseado nos limites comuns de 1 a 8)
         JPanel painelSemestre = new JPanel(new BorderLayout(5, 5));
         painelSemestre.setOpaque(false);
+        painelSemestre.setMaximumSize(new Dimension(300, 20));
         JLabel labelSemestre = new JLabel("Semestre:");
+        labelSemestre.setFont(new Font("Arial", Font.BOLD, 15));
         labelSemestre.setForeground(Color.WHITE);
         Integer[] semestres = {1, 2, 3, 4, 5, 6, 7, 8};
         JComboBox<Integer> comboSemestre = new JComboBox<>(semestres);

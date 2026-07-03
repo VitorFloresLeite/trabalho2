@@ -27,6 +27,8 @@ public class PainelCadastroProfessor extends Painel {
         painelNome.setOpaque(false);
         JLabel labelNome = new JLabel("Nome do professor:");
         labelNome.setForeground(Color.WHITE);
+        labelNome.setFont(new Font("SansSerif", Font.BOLD, 20));
+        labelNome.setAlignmentX(Component.CENTER_ALIGNMENT);
         JTextField campoNome = new JTextField();
         painelNome.add(labelNome, BorderLayout.NORTH);
         painelNome.add(campoNome, BorderLayout.CENTER);
@@ -37,8 +39,11 @@ public class PainelCadastroProfessor extends Painel {
         JPanel painelCompetencias = new JPanel();
         painelCompetencias.setLayout(new BoxLayout(painelCompetencias, BoxLayout.Y_AXIS));
         painelCompetencias.setOpaque(false);
+        
         JLabel labelCompetencias = new JLabel("Competências:");
         labelCompetencias.setForeground(Color.WHITE);
+        labelCompetencias.setAlignmentX(Component.CENTER_ALIGNMENT);
+        labelCompetencias.setFont(new Font("SansSerif", Font.BOLD, 20));
         painelCompetencias.add(labelCompetencias);
 
         JPanel gradesCompetencias = new JPanel(new GridLayout(0, 2, 8, 5));
@@ -58,23 +63,39 @@ public class PainelCadastroProfessor extends Painel {
         JPanel painelDisponibilidade = new JPanel();
         painelDisponibilidade.setLayout(new BoxLayout(painelDisponibilidade, BoxLayout.Y_AXIS));
         painelDisponibilidade.setOpaque(false);
+
         JLabel labelDisponibilidade = new JLabel("Disponibilidade:");
         labelDisponibilidade.setForeground(Color.WHITE);
+        labelDisponibilidade.setFont(new Font("SansSerif", Font.BOLD, 20));
         painelDisponibilidade.add(labelDisponibilidade);
 
         JPanel painelHorario = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 5));
         painelHorario.setOpaque(false);
+
         JComboBox<Dias> comboDias = new JComboBox<>(Dias.values());
         JComboBox<Turnos> comboTurnos = new JComboBox<>(Turnos.values());
         JComboBox<Periodos> comboPeriodos = new JComboBox<>(Periodos.values());
-        painelHorario.add(new JLabel("Dia:"));
-        painelHorario.add(comboDias);
-        painelHorario.add(new JLabel("Turno:"));
-        painelHorario.add(comboTurnos);
-        painelHorario.add(new JLabel("Período:"));
-        painelHorario.add(comboPeriodos);
-        painelDisponibilidade.add(painelHorario);
 
+        JLabel labelDia = new JLabel("Dia:");
+        JLabel labelTurno = new JLabel("Turno:");
+        JLabel labelPeriodo = new JLabel("Período:");
+
+        labelDia.setFont(new Font("SansSerif", Font.BOLD, 15));
+        labelTurno.setFont(new Font("SansSerif", Font.BOLD, 15));
+        labelPeriodo.setFont(new Font("SansSerif", Font.BOLD, 15));
+
+        labelDia.setForeground(Color.WHITE);
+        labelTurno.setForeground(Color.WHITE);
+        labelPeriodo.setForeground(Color.WHITE);
+
+        painelHorario.add(labelDia);
+        painelHorario.add(comboDias);
+        painelHorario.add(labelTurno);
+        painelHorario.add(comboTurnos);
+        painelHorario.add(labelPeriodo);
+        painelHorario.add(comboPeriodos);
+
+        painelDisponibilidade.add(painelHorario);
         DefaultListModel<String> modeloHorarios = new DefaultListModel<>();
         JList<String> listaHorarios = new JList<>(modeloHorarios);
         listaHorarios.setVisibleRowCount(4);

@@ -51,8 +51,7 @@ public class Alocacao{
     }
     @Override
     public String toString(){
-        return "Alocação: " +
-                "\nTurma: " + turma.getCurso() + " - Semestre: " + turma.getSemestre() +
+        return "Turma: " + turma.getCurso() + " - " + turma.getSemestre() +
                 "\nDisciplina: " + disciplina +
                 "\nProfessor: " + professor.getNome() +
                 "\nHorario: " + horario.toString();
